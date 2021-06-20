@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/tasks/edit/{{task._id}}" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="title" placeholder="Orario" value="{{task.title}}"
+                            class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" value="{{task.description}}"
+                            placeholder="Nome e Cognome">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="available" class="form-control" value="{{task.available}}"
+                            placeholder="Disponibilità">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Prenota
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
