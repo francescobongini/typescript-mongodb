@@ -18,14 +18,19 @@ router.route('/create')
           rl.question('Inserire password: ', async (answer) => {
             switch(answer.toLowerCase()) {
               case '0000':
-                console.log('Super!');
+                console.log('Password corretta!');
                 const { title, description, available } = req.body;
                 const task = new Task({ title, description,available});
-                await task.save();
-                res.redirect('/tasks/list');
+                if(available=="disponibile"){
+                    await task.save();
+                    res.redirect('/tasks/list');
+                }
+                else{
+                    console.log("Errore di battitura?")
+                }
                 break;
               default:
-                console.log('Invalid answer!');
+                console.log('Password errata!');
             }
             rl.close();
           });
@@ -37,6 +42,12 @@ router.route('/create')
 router.route('/list')
     .get(async (req: Request, res: Response) => {
         const tasks = await Task.find();
+        let i:any;
+        console.log('Lista dei clienti di oggi: ')
+        for (i in tasks) {
+            console.log( tasks[i]['description'], 'alle ore ',tasks[i]['title'] )
+         }
+        
         res.render('tasks/list', { tasks });
     });
 router.route('/occupato')
